@@ -1,0 +1,25 @@
+*** Settings ***
+Library           Selenium2Library
+Library           Collections
+Library           String
+Library           BuiltIn
+Library           DateTime
+Library           OperatingSystem
+Library           DatabaseLibrary
+Library           ArchiveLibrary
+Library           Process
+Library           XML
+Library           json
+Library           RequestsLibrary
+Library           ImapLibrary
+Library           ../Library/ExcelLibraryV2.py
+Library           JSONLibrary
+Resource          ../Variables/GlobalConfig.robot
+Resource          ../Variables/LocalConfig.robot
+Resource          Common_Keyword/ExcelKeyword.robot
+Resource          Common_Keyword/CommonKeyword.robot
+Resource          API_Keyword/PDPA_Keyword.robot
+Resource          API_Keyword/API_CollectionPoint.robot
+Resource          API_Keyword/API_HealthCheck.robot
+Resource          API_Keyword/API_GeneralConsent.robot
+Resource          API_Keyword/PrepareDataKeyword.robot
