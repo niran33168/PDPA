@@ -49,8 +49,8 @@ Submit general consent Empty value
    [Template]    API_GeneralConsent_Submit
    #rowNo        statusCode                   testcaseNo
     37            401                          GC1006_600
-    38            400                          GC1006_601
-    39            400                          GC1006_602
+    38            500                          GC1006_601
+    39            500                          GC1006_602
 
 # Submit general consent Invalid
 #    [Setup]       Run Keywords                 Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
