@@ -1,0 +1,30 @@
+{
+    "AgeRangeCode": "",
+    "CollectionPointGuid": "",
+    "CompanyId": 0,
+    "WebSiteId": 0,
+    "Uid": 0,
+    "FullName": "",
+    "Email": "",
+    "PhoneNumber": "",
+    "FromBrowser": "",
+    "FromWebsite": "",
+    "VerifyType": "",
+    "EventCode": "",
+    "IdCardNumber": "",
+    "Expired": "",
+    "ConsentSignature": "",
+    "Purpose": [
+        {
+            "PurposeGuid": "",
+            "Active": true,
+            "Expired": ""
+        }
+    ],
+    "CollectionPointCustomField": [
+        {
+            "CollectionPointCustomFieldConfigID": 0,
+            "Value": ""
+        }
+    ]
+}
