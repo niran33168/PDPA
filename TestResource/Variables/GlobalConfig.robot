@@ -1,6 +1,6 @@
 *** Variables ***
 #### AUTHORIZATION ####
-${token}    bearer 0CktjiNAS3gzU2r47fNTwIw6Rx4d_iqaeOMWXwtn52YPGQKR270KRONZ5fpBUYG7cokhhuD_J5oPYL42_PXtm6UcPPaFvXoyVwReaqt6c7Zj3_oAUm30pPQweZTzzAqEc6SXUIdnsUcFRXpBXnX5nG1ffFnar2vJSovElso6XQnDmltYYJqNzN9D2VyV4yHpVa66SggCJ-xLPmVMa04DpUAIV7zaqVW0nJ7UvEua1cCPLDSian_7n12yyyDi50sLM-Mzgoi3VdUG0jztf_IL0QyoPhd4WKgSqsZJkrHzDFI
+${token}    bearer urfuDNrngap1-aidikNl-XfP-vEqGEUkUqFQZB6lUfWTlZV4NkxXtNrPdXZYqt3_Yq6NilJZ--iiYSuVsxsf7Yt-NYynDIBuNGbXNetCl62IlRCfUGKazZwHHOylDwKsq2NHNmByTeVElFZMllT_4JGo73rJmR6LSuWxf15U1yfKzLSc0CY-BQfJf2pU7hCJfAzlA6DYUhKK9PFrypxzcSOlEeKsO-uwRlQOTz-svTL-o_60HimkovOD5oW3K17KOySWvNSYvEJucGGgX5N74witlu-IbaScK8zfq0-FnM0
 
 #### Web ####
 

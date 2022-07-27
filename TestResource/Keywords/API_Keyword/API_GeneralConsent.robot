@@ -67,22 +67,33 @@ API_GeneralConsent_Submit
     Generate_File_Path_Request    ${JSON_GeneralConsent_Submit}
     ${data_test}                  Read_Excel_For_Test                                ${EXCEL_NAME}                                     ${SHEET_NAME}                                         ${rowNo}
     ${request}                    Prepare_Data_For_API_Post_GeneralConsent_Submit    ${data_test}
-    ${data}                       Run Keyword If                                     ${rowNo} < 6                                      Validation_API_Post_GeneralConsent_Submit             ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE IF                                            5 < ${rowNo} < 8                                  Validation_API_Post_GeneralConsent_Submit_Handling    ${request}       ${statusCode}    ${rowNo}
+    ${data}                       Run Keyword If                                     ${rowNo} < 16                                     Validation_API_Post_GeneralConsent_Submit             ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE IF                                            15 < ${rowNo} < 18                                Validation_API_Post_GeneralConsent_Submit_Handling    ${request}       ${statusCode}    ${rowNo}
     ...                           ELSE                                               Validation_API_Post_GeneralConsent_Submit_Fail    ${request}                                            ${statusCode}    ${rowNo}
 
-# Validation_API_Post_GeneralConsent_Submit
+Validation_API_Post_GeneralConsent_Submit
+    [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
+    Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
+    ${HEADER_GENERALCONSENTSUBMIT}                      create dictionary                Authorization=${token}        Content-Type=application/json             CurrentUtcOffset="+07:00"    IsCurrentlyDst=0
+    ${response}                                         Post On Session                  GeneralConsentSubmit          ${API_GENERALCONSENT_SUBMIT['${ENV}']}    data=${request}              headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}    
+    Log many                                            ${response.text}
+    should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
+    Set Test Variable                                   ${actual}                        ${response.text}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                             ${response.status_code}
+    Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                                  ${status}
+    Run Keyword If                                      ${status}==False                 Log                           Fail
+    ...                                                 ELSE IF                          ${status}==True               Log                                       ${actual}
 
 Validation_API_Post_GeneralConsent_Submit_Handling
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTSUBMIT}                      create dictionary                Authorization=${token}        Content-Type=application/json    CurrentUtcOffset="+07:00"    IsCurrentlyDst=0
-    ${response}                                         Run Keyword If                   ${rowNo} == 6                 Post On Session                  GeneralConsentSubmit         ${API_GENERALCONSENT_SUBMIT_ERROR['${ENV}']}    data=${request}    headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
-    ...                                                 ELSE IF                          ${rowNo} == 7                 Post On Session                  GeneralConsentSubmit         ${API_GENERALCONSENT_SUBMIT['${ENV}']}          data={}            headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
+    ${response}                                         Run Keyword If                   ${rowNo} == 16                Post On Session                  GeneralConsentSubmit         ${API_GENERALCONSENT_SUBMIT_ERROR['${ENV}']}    data=${request}    headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
+    ...                                                 ELSE IF                          ${rowNo} == 17                Post On Session                  GeneralConsentSubmit         ${API_GENERALCONSENT_SUBMIT['${ENV}']}          data={}            headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
     Log many                                            ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
-    ${status} =                                         Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                    ${response.status_code}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                    ${response.status_code}
     Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                         ${status}
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                              ${actual}
@@ -90,17 +101,18 @@ Validation_API_Post_GeneralConsent_Submit_Handling
 Validation_API_Post_GeneralConsent_Submit_Fail
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
-    ${HEADER_GENERALCONSENTSUBMIT}                      Run Keyword If                   ${rowNo} == 13                create dictionary                         Content-Type=application/json    CurrentUtcOffset="+07:00"                 IsCurrentlyDst=0
-    ...                                                 ELSE IF                          ${rowNo} == 14                create dictionary                         Authorization=${token}           Content-Type=application/json             IsCurrentlyDst=0
-    ...                                                 ELSE IF                          ${rowNo} == 15                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset="+07:00"
-    ...                                                 ELSE IF                          ${rowNo} == 37                create dictionary                         Authorization=${empty}           Content-Type=application/json             CurrentUtcOffset="+07:00"        IsCurrentlyDst=0
-    ...                                                 ELSE IF                          ${rowNo} == 38                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset=${empty}        IsCurrentlyDst=0
-    ...                                                 ELSE IF                          ${rowNo} == 39                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset="+07:00"        IsCurrentlyDst=${empty}
-    ${response}=                                        Post On Session                  GeneralConsentSubmit          ${API_GENERALCONSENT_SUBMIT['${ENV}']}    data=${request}                  headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
+    ${HEADER_GENERALCONSENTSUBMIT}                      Run Keyword If                   ${rowNo} == 23                create dictionary                         Content-Type=application/json    CurrentUtcOffset="+07:00"                 IsCurrentlyDst=0
+    ...                                                 ELSE IF                          ${rowNo} == 24                create dictionary                         Authorization=${token}           Content-Type=application/json             IsCurrentlyDst=0
+    ...                                                 ELSE IF                          ${rowNo} == 25                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset="+07:00"
+    ...                                                 ELSE IF                          ${rowNo} == 47                create dictionary                         Authorization=${empty}           Content-Type=application/json             CurrentUtcOffset="+07:00"        IsCurrentlyDst=0
+    ...                                                 ELSE IF                          ${rowNo} == 48                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset=${empty}        IsCurrentlyDst=0
+    ...                                                 ELSE IF                          ${rowNo} == 49                create dictionary                         Authorization=${token}           Content-Type=application/json             CurrentUtcOffset="+07:00"        IsCurrentlyDst=${empty}
+    ...                                                 ELSE                             create dictionary             Authorization=${token}                    Content-Type=application/json    CurrentUtcOffset="+07:00"                 IsCurrentlyDst=0
+    ${response}                                         Post On Session                  GeneralConsentSubmit          ${API_GENERALCONSENT_SUBMIT['${ENV}']}    data=${request}                  headers=${HEADER_GENERALCONSENTSUBMIT}    expected_status=${statusCode}
     Log many                                            ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
-    ${status} =                                         Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                             ${response.status_code}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                             ${response.status_code}
     Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                                  ${status}
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                       ${actual}

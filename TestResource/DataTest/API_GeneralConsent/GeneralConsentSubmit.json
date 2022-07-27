@@ -17,7 +17,7 @@
     "Purpose": [
         {
             "PurposeGuid": "",
-            "Active": true,
+            "Active": 0,
             "Expired": ""
         }
     ],
