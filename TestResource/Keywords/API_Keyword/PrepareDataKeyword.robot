@@ -88,8 +88,8 @@ Prepare_Data_For_API_Post_GeneralConsent_List
     Run Keyword If    '${Test_Data['GeneralConsentFilterKey.PhoneNumber']}'=='format' or '${Test_Data['GeneralConsentFilterKey.PhoneNumber']}'=='length'    set to dictionary                                                  ${json['GeneralConsentFilterKey']}    PhoneNumber=${string}
     Run Keyword If    '${Test_Data['GeneralConsentFilterKey.PhoneNumber']}'=='missing'                                                                      Delete Object From Json                                            ${json}                               $..GeneralConsentFilterKey.PhoneNumber
 
-    ${string}         Run Keyword If                                                                                                                          '${Test_Data['GeneralConsentFilterKey.PhoneNumber']}'=='format'    Generate_String_Format
-    ...               ELSE IF                                                                                                                                 '${Test_Data['GeneralConsentFilterKey.PhoneNumber']}'=='length'    Generate_String_Length
+    ${string}         Run Keyword If                                                                                                                          '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='format'    Generate_String_Format
+    ...               ELSE IF                                                                                                                                 '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='length'    Generate_String_Length
     Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='empty' and '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='None'      set to dictionary                                                  ${json['GeneralConsentFilterKey']}    IdCardNumber=${Test_Data['GeneralConsentFilterKey.IdCardNumber']}
     Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='format' or '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='length'    set to dictionary                                                  ${json['GeneralConsentFilterKey']}    IdCardNumber=${string}
     Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='missing'                                                                       Delete Object From Json                                            ${json}                               $..GeneralConsentFilterKey.IdCardNumber
@@ -232,7 +232,7 @@ Prepare_Data_For_API_Post_GeneralConsent_Submit
     &{dict_purpose}    Run Keyword If                   '${status}' == 'False'                                                                                                                                                                                                                                                                      Create Dictionary    PurposeGuid=${Test_Data['Purpose.PurposeGuid']}    Active=${Test_Data['Purpose.Active']}    Expired=${Test_Data['Purpose.Expired']}    
     @{list}            Create List                      ${dict_purpose}
 
-    Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None' and '${Test_Data['Purpose.Active']}'!='empty' and '${Test_Data['Purpose.Active']}'!='None' and '${Test_Data['Purpose.Expired']}'!='empty' and '${Test_Data['Purpose.Expired']}'!='None'    set to dictionary    ${json}    Purpose=${list}
+    Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None'    set to dictionary    ${json}    Purpose=${list}
 
     Log Dictionary     ${json}
     ${json_string}=    evaluate          json.dumps(${json})    json

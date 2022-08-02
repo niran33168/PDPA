@@ -3,22 +3,22 @@ Resource    ../TestResource/Keywords/AllKeywords.txt
 
 *** Test Cases ***
 GeneralConsent List Success
-   [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
-   ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
-   [Teardown]    Close Browser
-   [Template]    API_GeneralConsent_List
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
+    [Teardown]    Close Browser
+    [Template]    API_GeneralConsent_List
    #rowNo        statusCode                 testcaseNo
-   2             200                        GC1001_000
-   3             200                        GC1001_001
-   4             200                        GC1001_002
-   5             200                        GC1001_003
-   6             200                        GC1001_004
-   7             200                        GC1001_005
-   8             200                        GC1001_006
-   9             200                        GC1001_007
-   10            200                        GC1001_008
-   11            200                        GC1001_009
-   12            200                        GC1001_010
+    2             200                        GC1001_000
+    3             200                        GC1001_001
+    4             200                        GC1001_002
+    5             200                        GC1001_003
+    6             200                        GC1001_004
+    7             200                        GC1001_005
+    8             200                        GC1001_006
+    9             200                        GC1001_007
+    10            200                        GC1001_008
+    11            200                        GC1001_009
+    12            200                        GC1001_010
 
 GeneralConsent List Handling
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
@@ -81,18 +81,18 @@ GeneralConsent List Invalid
     [Teardown]    Close Browser
     [Template]    API_GeneralConsent_List
    #rowNo        statusCode                       testcaseNo
-    47            500                        GC1006_600
-    48            200                        GC1006_601
-    49            200                        GC1006_602
-    50            500                        GC1006_603
-    51            500                        GC1006_604
-    52            500                        GC1006_605
-    53            500                        GC1006_606
-    54            500                        GC1006_607
-    55            200                        GC1006_608
-    56            200                        GC1006_609
-    57            200                        GC1006_610
-    59            200                        GC1006_611
-    60            200                        GC1006_612
-    61            200                        GC1006_613
-    62            200                        GC1006_614
+    47            500                        GC1006_800
+    48            200                        GC1006_801
+    49            200                        GC1006_802
+    50            500                        GC1006_803
+    51            500                        GC1006_804
+    52            500                        GC1006_805
+    53            500                        GC1006_806
+    54            500                        GC1006_807
+    55            200                        GC1006_808
+    56            200                        GC1006_809
+    57            200                        GC1006_810
+    59            200                        GC1006_811
+    60            200                        GC1006_812
+    61            200                        GC1006_813
+    62            200                        GC1006_814
