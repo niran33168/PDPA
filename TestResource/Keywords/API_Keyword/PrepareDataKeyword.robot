@@ -90,9 +90,9 @@ Prepare_Data_For_API_Post_GeneralConsent_List
 
     ${string}         Run Keyword If                                                                                                                          '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                                                                 '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='length'    Generate_String_Length
-    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='empty' and '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='None'      set to dictionary                                                  ${json['GeneralConsentFilterKey']}    IdCardNumber=${Test_Data['GeneralConsentFilterKey.IdCardNumber']}
-    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='format' or '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='length'    set to dictionary                                                  ${json['GeneralConsentFilterKey']}    IdCardNumber=${string}
-    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='missing'                                                                       Delete Object From Json                                            ${json}                               $..GeneralConsentFilterKey.IdCardNumber
+    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='empty' and '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'!='None'      set to dictionary                                                   ${json['GeneralConsentFilterKey']}    IdCardNumber=${Test_Data['GeneralConsentFilterKey.IdCardNumber']}
+    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='format' or '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='length'    set to dictionary                                                   ${json['GeneralConsentFilterKey']}    IdCardNumber=${string}
+    Run Keyword If    '${Test_Data['GeneralConsentFilterKey.IdCardNumber']}'=='missing'                                                                       Delete Object From Json                                             ${json}                               $..GeneralConsentFilterKey.IdCardNumber
 
     ${string}         Run Keyword If                                                                                                            '${Test_Data['GeneralConsentFilterKey.Email']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                                                   '${Test_Data['GeneralConsentFilterKey.Email']}'=='length'    Generate_String_Length
@@ -213,26 +213,54 @@ Prepare_Data_For_API_Post_GeneralConsent_Submit
     ${string}         Run Keyword If                                                                                        '${Test_Data['Purpose.PurposeGuid']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                               '${Test_Data['Purpose.PurposeGuid']}'=='length'    Generate_String_Length
     Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None'      set to dictionary                                  ${json_purpose}           PurposeGuid=${Test_Data['Purpose.PurposeGuid']}
-    Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'=='format' or '${Test_Data['Purpose.PurposeGuid']}'=='length'    set to dictionary                                  ${json}                   PurposeGuid=${string}
+    Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'=='format' or '${Test_Data['Purpose.PurposeGuid']}'=='length'    set to dictionary                                  ${json_purpose}           PurposeGuid=${string}
     Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'=='missing'                                                      Delete Object From Json                            ${json_purpose}           $..PurposeGuid
 
     ${string}         Run Keyword If                                                                              '${Test_Data['Purpose.Active']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                     '${Test_Data['Purpose.Active']}'=='length'    Generate_String_Length
     Run Keyword If    '${Test_Data['Purpose.Active']}'!='empty' and '${Test_Data['Purpose.Active']}'!='None'      set to dictionary                             ${json_purpose}           Active=${Test_Data['Purpose.Active']}
-    Run Keyword If    '${Test_Data['Purpose.Active']}'=='format' or '${Test_Data['Purpose.Active']}'=='length'    set to dictionary                             ${json}                   Active=${string}
+    Run Keyword If    '${Test_Data['Purpose.Active']}'=='format' or '${Test_Data['Purpose.Active']}'=='length'    set to dictionary                             ${json_purpose}           Active=${string}
     Run Keyword If    '${Test_Data['Purpose.Active']}'=='missing'                                                 Delete Object From Json                       ${json_purpose}           $..Active
 
     ${string}         Run Keyword If                                                                                '${Test_Data['Purpose.Expired']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                       '${Test_Data['Purpose.Expired']}'=='length'    Generate_String_Length
+    ...               ELSE IF                                                                                       '${Test_Data['Purpose.Expired']}'=='date'      Get_Date                  
     Run Keyword If    '${Test_Data['Purpose.Expired']}'!='empty' and '${Test_Data['Purpose.Expired']}'!='None'      set to dictionary                              ${json_purpose}           Expired=${Test_Data['Purpose.Expired']}
-    Run Keyword If    '${Test_Data['Purpose.Expired']}'=='format' or '${Test_Data['Purpose.Expired']}'=='length'    set to dictionary                              ${json}                   Expired=${string}
+    Run Keyword If    '${Test_Data['Purpose.Expired']}'=='format' or '${Test_Data['Purpose.Expired']}'=='length'    set to dictionary                              ${json_purpose}           Expired=${string}
     Run Keyword If    '${Test_Data['Purpose.Expired']}'=='missing'                                                  Delete Object From Json                        ${json_purpose}           $..Expired
 
-    ${status}          Run Keyword And Return Status    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None' and '${Test_Data['Purpose.Active']}'!='empty' and '${Test_Data['Purpose.Active']}'!='None' and '${Test_Data['Purpose.Expired']}'!='empty' and '${Test_Data['Purpose.Expired']}'!='None'    Log                  true                                               ELSE                                     Log                                        false
-    &{dict_purpose}    Run Keyword If                   '${status}' == 'False'                                                                                                                                                                                                                                                                      Create Dictionary    PurposeGuid=${Test_Data['Purpose.PurposeGuid']}    Active=${Test_Data['Purpose.Active']}    Expired=${Test_Data['Purpose.Expired']}    
+    ${status}          Run Keyword And Return Status    '${Test_Data['Purpose']}'!='empty' and '${Test_Data['Purpose']}'!='None'
+    &{dict_purpose}    Run Keyword If                   '${status}' == 'False'                                                      Create Dictionary    PurposeGuid=${Test_Data['Purpose.PurposeGuid']}    Active=${Test_Data['Purpose.Active']}    Expired=${Test_Data['Purpose.Expired']}    
     @{list}            Create List                      ${dict_purpose}
 
     Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None'    set to dictionary    ${json}    Purpose=${list}
+
+    Log Dictionary     ${json}
+    ${json_string}=    evaluate          json.dumps(${json})    json
+    log many           ${json_string}
+    log                ${json_string}
+    [Return]           ${json_string}
+
+Prepare_Data_For_API_Post_GeneralConsent_Info
+    [Arguments]       ${Test_Data}
+    ${json_string}    Get Binary File    ${file_path_request}.json
+    Log               ${json_string}
+    ${json}=          evaluate           json.loads('''${json_string}''')    json
+
+    Run Keyword If    '${Test_Data['IdCardNumber']}'!='empty' and '${Test_Data['IdCardNumber']}'!='None'    set to dictionary          ${json}    IdCardNumber=${Test_Data['IdCardNumber']}
+    Run Keyword If    '${Test_Data['IdCardNumber']}'=='missing'                                             Delete Object From Json    ${json}    $..IdCardNumber
+
+    Run Keyword If    '${Test_Data['FullName']}'!='empty' and '${Test_Data['FullName']}'!='None'    set to dictionary          ${json}    FullName=${Test_Data['FullName']}
+    Run Keyword If    '${Test_Data['FullName']}'=='missing'                                         Delete Object From Json    ${json}    $..FullName
+
+    Run Keyword If    '${Test_Data['Email']}'!='empty' and '${Test_Data['Email']}'!='None'    set to dictionary          ${json}    Email=${Test_Data['Email']}
+    Run Keyword If    '${Test_Data['Email']}'=='missing'                                      Delete Object From Json    ${json}    $..Email
+
+    Run Keyword If    '${Test_Data['PhoneNumber']}'!='empty' and '${Test_Data['PhoneNumber']}'!='None'    set to dictionary          ${json}    PhoneNumber=${Test_Data['PhoneNumber']}
+    Run Keyword If    '${Test_Data['PhoneNumber']}'=='missing'                                            Delete Object From Json    ${json}    $..PhoneNumber
+
+    Run Keyword If    '${Test_Data['CollectionPointGuid']}'!='empty' and '${Test_Data['CollectionPointGuid']}'!='None'    set to dictionary          ${json}    CollectionPointGuid=${Test_Data['CollectionPointGuid']}
+    Run Keyword If    '${Test_Data['CollectionPointGuid']}'=='missing'                                                    Delete Object From Json    ${json}    $..CollectionPointGuid
 
     Log Dictionary     ${json}
     ${json_string}=    evaluate          json.dumps(${json})    json

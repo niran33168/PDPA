@@ -21,7 +21,7 @@ API_HealthCheck_Readiness
 Validation_API_HealthCheck_Liveness
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Liveness             ${HOST_NAME}                  verify=${True}
-    ${HEADER_HEALTHCHECK_LIVENESS}              create dictionary                Authorization=${token}        Content-Type=application/json            Accept=application/json
+    ${HEADER_HEALTHCHECK_LIVENESS}              create dictionary                Authorization=${token}        Content-Type=${Content_Type}            Accept=application/json
     ${response}=                                GET On Session                   HealthCheck_Liveness          ${API_HEALTHCHECK_LIVENESS['${ENV}']}    data=${request}            headers=${HEADER_HEALTHCHECK_LIVENESS}    expected_status=${statusCode}
     Log many                                    ${response.text}
     ${json}                                     Convert String To JSON           ${response.text}
@@ -35,9 +35,9 @@ Validation_API_HealthCheck_Liveness
 Validation_API_HealthCheck_Liveness_Fail
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Liveness             ${HOST_NAME}                  verify=${True}
-    ${HEADER_HEALTHCHECK_LIVENESS}              Run Keyword If                   ${rowNo} == 5                 create dictionary           Content-Type=application/json            Accept=application/json
-    ...                                         ELSE IF                          ${rowNo} == 6                 create dictionary           Authorization=${empty}                   Content-Type=application/json                  Accept=application/json
-    ...                                         ELSE                             create dictionary             Authorization=${INVALID}    Content-Type=application/json            Accept=application/json                        
+    ${HEADER_HEALTHCHECK_LIVENESS}              Run Keyword If                   ${rowNo} == 5                 create dictionary           Content-Type=${Content_Type}            Accept=application/json
+    ...                                         ELSE IF                          ${rowNo} == 6                 create dictionary           Authorization=${empty}                   Content-Type=${Content_Type}                  Accept=application/json
+    ...                                         ELSE                             create dictionary             Authorization=${INVALID}    Content-Type=${Content_Type}            Accept=application/json                        
     ${response}                                 Run Keyword If                   ${rowNo} == 4                 GET On Session              HealthCheck_Liveness                     ${API_HEALTHCHECK_LIVENESS_ERROR['${ENV}']}    data=${request}                           headers=${HEADER_HEALTHCHECK_LIVENESS}    expected_status=${statusCode}
     ...                                         ELSE                             GET On Session                HealthCheck_Liveness        ${API_HEALTHCHECK_LIVENESS['${ENV}']}    data=${request}                                headers=${HEADER_HEALTHCHECK_LIVENESS}    expected_status=${statusCode}
     Log many                                    ${response.text}
@@ -51,7 +51,7 @@ Validation_API_HealthCheck_Liveness_Fail
 Validation_API_HealthCheck_Readiness
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Readiness            ${HOST_NAME}                  verify=${True}
-    ${HEADER_HEALTHCHECK_READINESS}=            create dictionary                Authorization=${token}        Content-Type=application/json             Accept=application/json
+    ${HEADER_HEALTHCHECK_READINESS}=            create dictionary                Authorization=${token}        Content-Type=${Content_Type}             Accept=application/json
     ${response}=                                GET On Session                   HealthCheck_Readiness         ${API_HEALTHCHECK_READINESS['${ENV}']}    data=${request}            headers=${HEADER_HEALTHCHECK_READINESS}    expected_status=${statusCode}
     Log many                                    ${response.text}
     ${json}                                     Convert String To JSON           ${response.text}
@@ -65,10 +65,10 @@ Validation_API_HealthCheck_Readiness
 Validation_API_HealthCheck_Readiness_Fail
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Readiness            ${HOST_NAME}                  verify=${True}
-    ${HEADER_HEALTHCHECK_READINESS}             Run Keyword If                   ${rowNo} == 4                 create dictionary         Content-Type=application/json             Accept=application/json
-    ...                                         ELSE IF                          ${rowNo} == 5                 create dictionary         Authorization=${empty}                    Content-Type=application/json                   Accept=application/json
-    ...                                         ELSE IF                          ${rowNo} == 6                 create dictionary         Authorization=${INVALID}                  Content-Type=application/json                   Accept=application/json
-    ...                                         ELSE                             create dictionary             Authorization=${token}    Content-Type=application/json             Accept=application/json                         
+    ${HEADER_HEALTHCHECK_READINESS}             Run Keyword If                   ${rowNo} == 4                 create dictionary         Content-Type=${Content_Type}             Accept=application/json
+    ...                                         ELSE IF                          ${rowNo} == 5                 create dictionary         Authorization=${empty}                    Content-Type=${Content_Type}                   Accept=application/json
+    ...                                         ELSE IF                          ${rowNo} == 6                 create dictionary         Authorization=${INVALID}                  Content-Type=${Content_Type}                   Accept=application/json
+    ...                                         ELSE                             create dictionary             Authorization=${token}    Content-Type=${Content_Type}             Accept=application/json                         
     ${response}                                 Run Keyword If                   ${rowNo} == 3                 GET On Session            HealthCheck_Readiness                     ${API_HEALTHCHECK_READINESS_ERROR['${ENV}']}    data=${request}                            headers=${HEADER_HEALTHCHECK_READINESS}    expected_status=${statusCode}
     ...                                         ELSE                             GET On Session                HealthCheck_Readiness     ${API_HEALTHCHECK_READINESS['${ENV}']}    data=${request}                                 headers=${HEADER_HEALTHCHECK_READINESS}    expected_status=${statusCode}
     Log many                                    ${response.text}

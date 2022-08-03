@@ -13,7 +13,7 @@ API_Get_Collection_Point_List
 Validation_Get_CollectionPoint_List
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                       CollectionPointList              ${HOST_NAME}                  verify=${True}
-    ${HEADER_COLLECTIONPOINTLIST}=                       create dictionary                Authorization=${token}        Content-Type=application/json            CurrentUtcOffset="+07:00"    IsCurrentlyDst=0
+    ${HEADER_COLLECTIONPOINTLIST}=                       create dictionary                Authorization=${token}        Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
     ${response}=                                         GET On Session                   CollectionPointList           ${API_COLLECTIONPOINT_LIST['${ENV}']}    data=${request}              headers=${HEADER_COLLECTIONPOINTLIST}    expected_status=${statusCode}
     Log many                                             ${response.text}
     ${json}                                              Convert String To JSON           ${response.text}
@@ -27,12 +27,12 @@ Validation_Get_CollectionPoint_List
 Validation_Get_CollectionPoint_List_Fail
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                       CollectionPointList              ${HOST_NAME}                  verify=${True}
-    ${HEADER_COLLECTIONPOINTLIST}                        Run Keyword If                   ${rowNo} == 3                 create dictionary                        Content-Type=application/json    CurrentUtcOffset="+07:00"                IsCurrentlyDst=0
-    ...                                                  ELSE IF                          ${rowNo} == 4                 create dictionary                        Authorization=${token}           Content-Type=application/json            IsCurrentlyDst=0
-    ...                                                  ELSE IF                          ${rowNo} == 5                 create dictionary                        Authorization=${token}           Content-Type=application/json            CurrentUtcOffset="+07:00"
-    ...                                                  ELSE IF                          ${rowNo} == 6                 create dictionary                        Authorization=${EMPTY}           Content-Type=application/json            CurrentUtcOffset="+07:00"        IsCurrentlyDst=0
-    ...                                                  ELSE IF                          ${rowNo} == 7                 create dictionary                        Authorization=${token}           Content-Type=application/json            CurrentUtcOffset=${EMPTY}        IsCurrentlyDst=0
-    ...                                                  ELSE IF                          ${rowNo} == 8                 create dictionary                        Authorization=${token}           Content-Type=application/json            CurrentUtcOffset="+07:00"        IsCurrentlyDst=${EMPTY}    
+    ${HEADER_COLLECTIONPOINTLIST}                        Run Keyword If                   ${rowNo} == 3                 create dictionary                        Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}                IsCurrentlyDst=0
+    ...                                                  ELSE IF                          ${rowNo} == 4                 create dictionary                        Authorization=${token}           Content-Type=${Content_Type}            IsCurrentlyDst=0
+    ...                                                  ELSE IF                          ${rowNo} == 5                 create dictionary                        Authorization=${token}           Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}
+    ...                                                  ELSE IF                          ${rowNo} == 6                 create dictionary                        Authorization=${EMPTY}           Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}        IsCurrentlyDst=0
+    ...                                                  ELSE IF                          ${rowNo} == 7                 create dictionary                        Authorization=${token}           Content-Type=${Content_Type}            CurrentUtcOffset=${EMPTY}        IsCurrentlyDst=0
+    ...                                                  ELSE IF                          ${rowNo} == 8                 create dictionary                        Authorization=${token}           Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}        IsCurrentlyDst=${EMPTY}    
     ${response}=                                         GET On Session                   CollectionPointList           ${API_COLLECTIONPOINT_LIST['${ENV}']}    data=${request}                  headers=${HEADER_COLLECTIONPOINTLIST}    expected_status=${statusCode}
     Log many                                             ${response.text}
     should Be Equal As Strings                           ${statusCode}                    ${response.status_code}
