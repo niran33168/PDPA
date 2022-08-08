@@ -23,3 +23,4 @@ Resource          API_Keyword/API_CollectionPoint.robot
 Resource          API_Keyword/API_HealthCheck.robot
 Resource          API_Keyword/API_GeneralConsent.robot
 Resource          API_Keyword/PrepareDataKeyword.robot
+Resource          WEB_Keyword/Web_Keywords.robot

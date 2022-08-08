@@ -3,7 +3,7 @@ Resource    ../TestResource/Keywords/AllKeywords.txt
 
 *** Test Cases ***
 HealthCheck Liveness Success
-    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
     ...           AND                         Set Test Variable    ${SHEET_NAME}    ${SHEET_HealthCheckLiveness}
     [Teardown]    Close Browser
     [Template]    API_HealthCheck_Liveness
@@ -12,7 +12,7 @@ HealthCheck Liveness Success
     # 3             200                         HL1001_001
 
 HealthCheck Liveness Handling
-    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
     ...           AND                         Set Test Variable    ${SHEET_NAME}    ${SHEET_HealthCheckLiveness}
     [Teardown]    Close Browser
     [Template]    API_HealthCheck_Liveness
@@ -20,7 +20,7 @@ HealthCheck Liveness Handling
     4             404                         HL1002_200
 
 HealthCheck Liveness Missing
-    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
     ...           AND                         Set Test Variable    ${SHEET_NAME}    ${SHEET_HealthCheckLiveness}
     [Teardown]    Close Browser
     [Template]    API_HealthCheck_Liveness
@@ -28,7 +28,7 @@ HealthCheck Liveness Missing
     5             401                         HL1004_400
 
 HealthCheck Liveness Empty value
-    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
     ...           AND                         Set Test Variable    ${SHEET_NAME}    ${SHEET_HealthCheckLiveness}
     [Teardown]    Close Browser
     [Template]    API_HealthCheck_Liveness
@@ -36,7 +36,7 @@ HealthCheck Liveness Empty value
     6             401                         HL1005_500
 
 HealthCheck Liveness Invalid
-    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
+    [Setup]       Run Keywords                Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
     ...           AND                         Set Test Variable    ${SHEET_NAME}    ${SHEET_HealthCheckLiveness}
     [Teardown]    Close Browser
     [Template]    API_HealthCheck_Liveness
