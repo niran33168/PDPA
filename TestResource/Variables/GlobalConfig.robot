@@ -15,8 +15,9 @@ ${TXT_PASSWORD}                         xpath=//input[@id="txt_password"]
 ${CHK_REMEMBER}                         xpath=//div[@id="chkbx_remember"]/div/span[2]
 ${BTN_LOGIN}                            xpath=//button[@id="btn_login"]
 
-${BTN_MENU}                             xpath=/html/body/div[3]/div[1]/div[1]/div/nav/div/a/div/div[1]/div/div[2]
+${BTN_MENU}                             xpath=//div[@id="menu-grid"]/div/div/div[2]
 ${BTN_MENU_SETTING}                     xpath=//span[contains(text(),'Settings')]/../img
+${BTN_MENU_MASTER}                      xpath=//span[contains(text(),'Master Data')]/../img
 ${BTN_Profile}                          xpath=//div[@id="image-user-profile"]/div/div/div/div
 
 ${BTN_CLOSE_POPUP}                      xpath=//div[@class="dx-closebutton dx-button dx-button-normal dx-button-mode-text dx-widget dx-button-has-icon"]
@@ -32,6 +33,7 @@ ${BTN_SAVE}                             xpath=//div[@id="icon-save"]
 
 #### USER ###
 ${HEADER_ADD_USER}                      xpath=//div[@id="form"]//span[contains(text(),'เพิ่มผู้ใช้งาน')]
+${HEADER_EDIT_USER}                     xpath=//div[@id="form"]//span[contains(text(),'แก้ไขผู้ใช้งาน')]
 ${TXT_TITLE}                            xpath=//div[@id="form"]//div[@title="คำนำหน้า"]
 ${TXT_FIRSTNAME}                        xpath=//div[@title="ชื่อ"]//input
 ${TXT_LASTNAME}                         xpath=//div[@title="นามสกุล"]//input
@@ -45,12 +47,22 @@ ${DDL_STATUS}                           xpath=//input[@name="Status"]/../div
 ${DDL_DEPARTMENT}                       xpath=//div[@title="แผนก"]/../div
 ${DDL_POSITION}                         xpath=//input[@name="PositionID"]/../div
 ${DDL_ROLE}                             xpath=//div[@id="gridContainer"]//input[@class="dx-texteditor-input"]
+${BTN_SAVE_ROLEUSER}                    xpath=//div[@id="gridContainer"]/div/div[6]/div[2]//a[1]
 
 #### ROLE ###
 ${HEADER_ADD_ROLE}                      xpath=//div[@id="form"]//span[contains(text(),'เพิ่มสิทธิ์การใช้งาน')]
 ${HEADER_EDIT_ROLE}                     xpath=//div[@id="form"]//span[contains(text(),'แก้ไขสิทธิ์การใช้งาน')]
 ${TXT_ROLE_CODE}                        xpath=//div[@title="รหัสสิทธ์การใช้งาน"]/..//input
 ${TXT_ROLD_DETAIL}                      xpath=//div[@title="รายละเอียด"]/..//textarea
+
+${BTN_EDIT}                             xpath=//*[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[1]
+${BTN_DELETE}                           xpath=//div[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[2]
+${BTN_CONFIRM}                          xpath=//span[contains(text(),'ตกลง')]/../../div
+
+#### MASTER ###
+${TXT_CONSENT}                          xpath=//span[contains(text(),'Consent')]/../../div[@class="dx-item-content dx-treeview-item-content"]
+${TXT_PURPOSE_CATEGORY}                 xpath=//span[contains(text(),'Purpose category')]/../../div[@class="dx-item-content dx-treeview-item-content"]
+${TXT_PURPOSE}                          xpath=//span[contains(text(),'Purpose')]/../../div[@class="dx-item-content dx-treeview-item-content"]
 
 #### API ####
 ${HOST_NAME}                            https://viriyah-pdpa-api.azurewebsites.net

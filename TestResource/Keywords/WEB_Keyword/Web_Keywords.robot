@@ -6,7 +6,8 @@ PDPAManagement
     [Arguments]       ${rowNo}               ${statusCode}              ${testcaseName}
     ${data_test}      Read_Excel_For_Test    ${EXCEL_NAME}              ${SHEET_NAME}      ${rowNo}
     Run Keyword If    ${rowNo} < 5           Setting_User    ${data_test}
-    ...    ELSE IF    4 < ${rowNo} < 8    Setting_Role    ${data_test}    
+    ...    ELSE IF    4 < ${rowNo} < 8    Setting_Role    ${data_test}
+    ...    ELSE IF    7 < ${rowNo} < 15   Master_Purpose_Category    ${data_test}            
 
 OpenWebPdpa
     [Arguments]                ${URL}    ${Browser}
@@ -34,13 +35,23 @@ Login_PDPA_Management
     Run Keyword If    '${data_test['remenber']}' == 'True'    Click Element               ${CHK_REMEMBER}    ELSE    Log    False
     Click Element     ${BTN_LOGIN}
 
-Select_Menu_setting
+Select_Menu
     Wait Until Element Is Visible    ${BTN_Profile}         ${timeout}
     Click Element                    ${BTN_MENU}
     sleep     2s
+Select_Menu_Setting
+    Select_Menu
     Wait Until Element Is Visible    ${BTN_MENU_SETTING}    ${timeout}
     Click Element                    ${BTN_MENU_SETTING}
-
+Select_Menu_Master
+    [Arguments]                      ${menu}
+    Select_Menu
+    Wait Until Element Is Visible    ${BTN_MENU_MASTER}    ${timeout}
+    Click Element                    ${BTN_MENU_MASTER}
+    Wait Until Element Is Visible    ${TXT_CONSENT}    ${timeout}   
+    Click Element                    ${TXT_CONSENT}
+    Run Keyword If                   '${menu}'=='purposecategory'    Click Element                    ${TXT_PURPOSE_CATEGORY} 
+    ...    ELSE    Click Element                    ${TXT_PURPOSE}
 SubMenu_User
     [Arguments]                      ${data_test}
     Wait Until Element Is Visible    ${MENU_USER}                       ${timeout}
@@ -86,7 +97,7 @@ AddUser
     Click Element                    xpath=//div[@id="gridContainer"]//div[@class="dx-item-content dx-toolbar-item-content"]
     Click Element                    ${DDL_ROLE}
     Click Element                    xpath=//div[@class="dx-item-content dx-list-item-content"][contains(text(),'ROLE-002 : สำหรับผู้ดูแลระบบ viriyah')]
-    Click Element                    xpath=//div[@id="gridContainer"]/div/div[6]/div[2]//a[1]
+    Click Element                    ${BTN_SAVE_ROLEUSER}
     Execute JavaScript    window.scrollTo(0, 0);
     Click Element                    ${BTN_SAVE}
     Wait Until Element Is Visible    ${MENU_USER}                       ${timeout}
@@ -94,6 +105,12 @@ AddUser
 
 EditUser
     [Arguments]    ${data_test}
+    Wait Until Element Is Visible    xpath=//*[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[6]/td[1]/a[2]                       ${timeout}
+    Click Element                    xpath=//*[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[6]/td[1]/a[2]
+    Wait Until Element Is Visible    ${HEADER_EDIT_USER}                       ${timeout}
+    Click Element                    ${BTN_SAVE}
+    Wait Until Element Is Visible    ${MENU_USER}                       ${timeout}
+    Close Browser
 
 DeleteUser
     
@@ -120,8 +137,8 @@ AddRole
 
 EditRole
     [Arguments]    ${data_test}
-    Wait Until Element Is Visible    xpath=//*[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[1]                       ${timeout}
-    Click Element                    xpath=//*[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[1]
+    Wait Until Element Is Visible    ${BTN_EDIT}                       ${timeout}
+    Click Element                    ${BTN_EDIT}
     Wait Until Element Is Visible    ${HEADER_EDIT_ROLE}                                                                                     ${timeout}
     InputValue                       ${TXT_ROLE_CODE}                                                                                       ${data_test['role.code']}
     InputValue                       ${TXT_ROLD_DETAIL}                                                                                       ${data_test['role.details']}
@@ -140,20 +157,26 @@ EditRole
     Close Browser
 
 DeleteRole
-    Wait Until Element Is Visible    xpath=//div[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[2]                       ${timeout}
-    Click Element                    xpath=//div[@id="gridContainer"]/div/div[6]/div[2]/table/tbody/tr[1]/td[1]/a[2]
-    Wait Until Element Is Visible    xpath=//span[contains(text(),'ตกลง')]/../../div                       ${timeout}
-    Click Element                    xpath=//span[contains(text(),'ตกลง')]/../../div
+    Wait Until Element Is Visible    ${BTN_DELETE}                       ${timeout}
+    Click Element                    ${BTN_DELETE}
+    Wait Until Element Is Visible    ${BTN_CONFIRM}                       ${timeout}
+    Click Element                    ${BTN_CONFIRM}
     Close Browser
 
 Setting_User
     [Arguments]              ${data_test}
     Login_PDPA_Management    ${data_test}
-    Select_Menu_setting
+    Select_Menu_Setting
     SubMenu_User             ${data_test}
 
 Setting_Role
     [Arguments]              ${data_test}
     Login_PDPA_Management    ${data_test}
-    Select_Menu_setting
+    Select_Menu_Setting
+    SubMenu_Role             ${data_test}
+
+Master_Purpose_Category
+    [Arguments]              ${data_test}
+    Login_PDPA_Management    ${data_test}
+    Select_Menu_MASTER
     SubMenu_Role             ${data_test}
