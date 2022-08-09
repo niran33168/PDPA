@@ -16,23 +16,41 @@ ${CHK_REMEMBER}                         xpath=//div[@id="chkbx_remember"]/div/sp
 ${BTN_LOGIN}                            xpath=//button[@id="btn_login"]
 
 ${BTN_MENU}                             xpath=/html/body/div[3]/div[1]/div[1]/div/nav/div/a/div/div[1]/div/div[2]
-${BTN_MENU_SETTING}                     xpath=//div[@id="itemMenu"]//img[@src="/Images/settings.png"]
+${BTN_MENU_SETTING}                     xpath=//span[contains(text(),'Settings')]/../img
 ${BTN_Profile}                          xpath=//div[@id="image-user-profile"]/div/div/div/div
 
+${BTN_CLOSE_POPUP}                      xpath=//div[@class="dx-closebutton dx-button dx-button-normal dx-button-mode-text dx-widget dx-button-has-icon"]
+
+#### MENU ###
 ${MENU_USER}                            xpath=//li[@data-item-id="SETTING_USER"]
 ${HEADER_MENU_USER}                     xpath=//div[@id="page-wrapper"]//span[contains(text(),'ข้อมูลผู้ใช้งาน')]
-#### USER ###
-${BTN_ADD_USER}                         xpath=//div[@id="icon-plus"]
-${HEADER_ADD_USER}                      xpath=//div[@id="form"]//span[contains(text(),'เพิ่มผู้ใช้งาน')]
+${MENU_ROLE}                            xpath=//li[@data-item-id="SETTING_ROLE"]
+${HEADER_MENU_ROLE}                     xpath=//div[@id="page-wrapper"]//span[contains(text(),'สิทธิ์การใช้งาน')]
 
+${BTN_ADD}                              xpath=//div[@id="icon-plus"]
+${BTN_SAVE}                             xpath=//div[@id="icon-save"]
+
+#### USER ###
+${HEADER_ADD_USER}                      xpath=//div[@id="form"]//span[contains(text(),'เพิ่มผู้ใช้งาน')]
 ${TXT_TITLE}                            xpath=//div[@id="form"]//div[@title="คำนำหน้า"]
 ${TXT_FIRSTNAME}                        xpath=//div[@title="ชื่อ"]//input
 ${TXT_LASTNAME}                         xpath=//div[@title="นามสกุล"]//input
 ${TXT_BIRTHDATE}                        xpath=//input[@name="BirthDate"]/../div//input
 ${TXT_EMAIL}                            xpath=//div[@title="อีเมล"]//input
-${TXT_USERNAME}                         xpath=//input[@name="Username"]
-${TXT_PASSWORD}                         xpath=//input[@name="Password"]
+${TXT_CREATEUSERNAME}                   xpath=//div[@title="Username"]/..//input
+${TXT_CREATEPASSWORD}                   xpath=//div[@title="รหัสผ่าน"]/..//input
 ${TXT_CONFIRMPASSWORD}                  xpath=//div[@title="ยืนยันรหัสผ่าน"]/../div//input
+${TXT_WORKSTART}                        xpath=//input[@name="WorkStart"]/../div//input
+${DDL_STATUS}                           xpath=//input[@name="Status"]/../div
+${DDL_DEPARTMENT}                       xpath=//div[@title="แผนก"]/../div
+${DDL_POSITION}                         xpath=//input[@name="PositionID"]/../div
+${DDL_ROLE}                             xpath=//div[@id="gridContainer"]//input[@class="dx-texteditor-input"]
+
+#### ROLE ###
+${HEADER_ADD_ROLE}                      xpath=//div[@id="form"]//span[contains(text(),'เพิ่มสิทธิ์การใช้งาน')]
+${HEADER_EDIT_ROLE}                     xpath=//div[@id="form"]//span[contains(text(),'แก้ไขสิทธิ์การใช้งาน')]
+${TXT_ROLE_CODE}                        xpath=//div[@title="รหัสสิทธ์การใช้งาน"]/..//input
+${TXT_ROLD_DETAIL}                      xpath=//div[@title="รายละเอียด"]/..//textarea
 
 #### API ####
 ${HOST_NAME}                            https://viriyah-pdpa-api.azurewebsites.net

@@ -2,11 +2,22 @@
 Resource    ../TestResource/Keywords/AllKeywords.txt
 
 *** Test Cases ***
-PDPA Management
+# Setting User
+#     [Setup]       Run Keywords      Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}    
+#     ...           AND               Set Test Variable    ${SHEET_NAME}    ${SHEET_UI}
+#     [Teardown]    Close All Browsers
+#     [Template]    PDPAManagement
+#    #rowNo        statusCode                       testcaseNo
+#     2             200               UI1001_000
+#     3             200               UI1001_001
+#     4             200               UI1001_002
+
+Setting Role
     [Setup]       Run Keywords      Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}    
     ...           AND               Set Test Variable    ${SHEET_NAME}    ${SHEET_UI}
-    [Teardown]    Close Browser
+    [Teardown]    Close All Browsers
     [Template]    PDPAManagement
    #rowNo        statusCode                       testcaseNo
-    2             200               UI1001_000
-    3             200               UI1001_001
+    5             200               UI1002_000
+    6             200               UI1002_001
+    7             200               UI1002_002

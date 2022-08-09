@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.7.2 on win32)" generated="20220809 08:44:40.530" rpa="false" schemaversion="3">
+<robot generator="Robot 5.0.1 (Python 3.7.2 on win32)" generated="20220809 14:27:14.672" rpa="false" schemaversion="3">
 <suite id="s1" name="Robot Interactive Console" source="c:\Users\Nut\.vscode\extensions\robocorp.robotframework-lsp-0.49.0\src\robotframework_ls\vendored\robotframework_interactive\robot_interactive_console.robot">
 <test id="s1-t1" name="Default Task/Test" line="5">
 <kw name="Interpreter Main Loop" library="MainLoop">
-<status status="PASS" starttime="20220809 08:44:40.632" endtime="20220809 08:44:44.834"/>
+<status status="PASS" starttime="20220809 14:27:14.735" endtime="20220809 14:27:17.742"/>
 </kw>
-<status status="PASS" starttime="20220809 08:44:40.630" endtime="20220809 08:44:44.835"/>
+<status status="PASS" starttime="20220809 14:27:14.733" endtime="20220809 14:27:17.743"/>
 </test>
-<status status="PASS" starttime="20220809 08:44:40.535" endtime="20220809 08:44:44.837"/>
+<status status="PASS" starttime="20220809 14:27:14.687" endtime="20220809 14:27:17.744"/>
 </suite>
 <statistics>
 <total>
