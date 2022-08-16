@@ -45,11 +45,11 @@ Submit general consent Business Case
     [Teardown]    Close Browser
     [Template]    API_GeneralConsent_Submit
    #rowNo        statusCode                   testcaseNo
-    18            500                          GC1004_400
-    19            204                          GC1004_401
-    20            204                          GC1004_402
-    21            204                          GC1004_403
-    22            204                          GC1004_404
+    18            204                          GC1004_400
+    19            500                          GC1004_401
+    20            500                          GC1004_402
+    21            500                          GC1004_403
+    22            500                          GC1004_404
 
 Submit general consent Missing value
     [Setup]       Run Keywords                 Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
@@ -63,16 +63,16 @@ Submit general consent Missing value
     26            204                          GC1005_503
     27            500                          GC1005_504
     28            500                          GC1005_505
-    29            500                          GC1005_506
-    30            500                          GC1005_507
-    31            204                          GC1005_508
-    32            204                          GC1005_509
-    33            204                          GC1005_510
-    34            204                          GC1005_511
+    29            204                          GC1005_506
+    30            204                          GC1005_507
+    31            500                          GC1005_508
+    32            500                          GC1005_509
+    33            500                          GC1005_510
+    34            500                          GC1005_511
     35            204                          GC1005_512
-    36            204                          GC1005_513
-    37            204                          GC1005_514
-    38            204                          GC1005_515
+    36            500                          GC1005_513
+    37            500                          GC1005_514
+    38            500                          GC1005_515
     39            204                          GC1005_516
     40            204                          GC1005_517
     41            204                          GC1005_518
@@ -93,13 +93,13 @@ Submit general consent Empty value
     49            204                          GC1006_602
     50            204                          GC1006_603
     51            500                          GC1006_604
-    52            204                          GC1006_605
+    52            500                          GC1006_605
     53            204                          GC1006_606
     54            204                          GC1006_607
     55            204                          GC1006_608
     56            204                          GC1006_609
     57            204                          GC1006_610
-    58            204                          GC1006_611
+    58            500                          GC1006_611
     59            204                          GC1006_612
     60            204                          GC1006_613
     61            204                          GC1006_614
@@ -125,8 +125,8 @@ Submit general consent Invalid value
     74            204                          GC1008_003
     75            500                          GC1008_004
     76            500                          GC1008_005
-    77            500                          GC1008_006
-    78            500                          GC1008_007
+    77            204                          GC1008_006
+    78            204                          GC1008_007
     79            204                          GC1008_008
     80            204                          GC1008_009
     81            204                          GC1008_010
