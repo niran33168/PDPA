@@ -2,12 +2,13 @@
 #### AUTHORIZATION ####
 ${token}               bearer urfuDNrngap1-aidikNl-XfP-vEqGEUkUqFQZB6lUfWTlZV4NkxXtNrPdXZYqt3_Yq6NilJZ--iiYSuVsxsf7Yt-NYynDIBuNGbXNetCl62IlRCfUGKazZwHHOylDwKsq2NHNmByTeVElFZMllT_4JGo73rJmR6LSuWxf15U1yfKzLSc0CY-BQfJf2pU7hCJfAzlA6DYUhKK9PFrypxzcSOlEeKsO-uwRlQOTz-svTL-o_60HimkovOD5oW3K17KOySWvNSYvEJucGGgX5N74witlu-IbaScK8zfq0-FnM0
 ${Content_Type}        application/json
-${CurrentUtcOffset}    +07:00
+
 
 #### Web ####
-${URL}              https://viriyah-pdpa.azurewebsites.net/
+${URL}              https://vpdpa-uat.viriyah.co.th/
 ${BrowserChrome}    Chrome
 ${timeout}          30s
+${CurrentUtcOffset}    +07:00
 
 #### Locator Xpath ####
 ${TXT_USERNAME}    xpath=//input[@id="txt_username"]
@@ -104,7 +105,7 @@ ${HEADER_MENU_PAGE_CONSENT}               xpath=//span[contains(text(),'Consent 
 ${TXT_COLLECTION_POINT}                   xpath=//span[contains(text(),'Collection point')]/../../..//input
 
 ### Cookie Scanner ###
-${HEADER_MENU_COOKIE_SCANNER}    xpath=//spAPIan[contains(text(),'Cookie Scanner')]
+${HEADER_MENU_COOKIE_SCANNER}    xpath=//span[contains(text(),'Cookie Scanner')]
 
 #### API ####
 ${HOST_NAME}                    https://viriyah-pdpa-api.azurewebsites.net

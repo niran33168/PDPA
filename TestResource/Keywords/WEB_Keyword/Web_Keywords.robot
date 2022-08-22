@@ -49,6 +49,8 @@ Login_PDPA_Management
 Select_Menu
     Wait Until Element Is Visible    ${BTN_Profile}    ${timeout}
     WaitAndClick                     ${BTN_MENU}
+    sleep                            2s
+
 
 Select_Menu_Setting
     Select_Menu
