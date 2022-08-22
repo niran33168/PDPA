@@ -3,10 +3,10 @@ Resource    ../TestResource/Keywords/AllKeywords.txt
 
 *** Test Cases ***
 GeneralConsent List Success
-    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                  
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_List
+    [Template]    apiGeneralConsentList
    #rowNo        statusCode                 testcaseNo
     2             200                        GC1001_000
     3             200                        GC1001_001
@@ -21,19 +21,19 @@ GeneralConsent List Success
     12            200                        GC1001_010
 
 GeneralConsent List Handling
-    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                  
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_List
+    [Template]    apiGeneralConsentList
    #rowNo        statusCode                       testcaseNo
     13            404                        GC1002_200
     14            500                        GC1002_101
 
 GeneralConsent List Missing
-    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                  
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_List
+    [Template]    apiGeneralConsentList
    #rowNo        statusCode                       testcaseNo
     15            401                        GC1004_400
     16            400                        GC1004_401
@@ -53,10 +53,10 @@ GeneralConsent List Missing
     30            200                        GC1004_415
 
 GeneralConsent List Empty value
-    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                  
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_List
+    [Template]    apiGeneralConsentList
    #rowNo        statusCode                       testcaseNo
     31            401                        GC1005_500
     32            200                        GC1005_501
@@ -76,10 +76,10 @@ GeneralConsent List Empty value
     46            200                        GC1005_515
 
 GeneralConsent List Invalid
-    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}  
+    [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                  
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentList}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_List
+    [Template]    apiGeneralConsentList
    #rowNo        statusCode                       testcaseNo
     47            500                        GC1006_800
     48            200                        GC1006_801

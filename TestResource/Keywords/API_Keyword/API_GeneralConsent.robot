@@ -2,30 +2,30 @@
 Resource    ../AllKeywords.txt
 
 *** Keywords ***
-API_GeneralConsent_List
-    [Arguments]                   ${rowNo}                                         ${statusCode}                                   ${testcaseName}
+apiGeneralConsentList
+    [Arguments]                   ${rowNo}                                         ${statusCode}                              ${testcaseName}
     Generate_File_Path_Request    ${JSON_GeneralConsent_List}
-    ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                                   ${SHEET_NAME}                                       ${rowNo}
-    ${request}                    Prepare_Data_For_API_Post_GeneralConsent_List    ${data_test}
-    ${data}                       Run Keyword If                                   ${rowNo} < 13                                   Validation_API_Post_GeneralConsent_List             ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE IF                                          12 < ${rowNo} < 15                              Validation_API_Post_GeneralConsent_List_Handling    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                             Validation_API_Post_GeneralConsent_List_Fail    ${request}                                          ${statusCode}    ${rowNo}
+    ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                              ${SHEET_NAME}                                  ${rowNo}
+    ${request}                    prepareDataForApiPostGeneralConsentList    ${data_test}
+    ${data}                       Run Keyword If                                   ${rowNo} < 13                              validationApiPostGeneralConsentList            ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE IF                                          12 < ${rowNo} < 15                         validationApiPostGeneralConsentListHandling    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                             validationApiPostGeneralConsentListFail    ${request}                                     ${statusCode}    ${rowNo}
 
-Validation_API_Post_GeneralConsent_List
+validationApiPostGeneralConsentList
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentList               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTLIST}=                       create dictionary                Authorization=${token}        Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
-    ${response}                                        Post On Session                  GeneralConsentList            ${API_GENERALCONSENT_LIST['${ENV}']}    data=${request}                         headers=${HEADER_GENERALCONSENTLIST}    expected_status=${statusCode}
+    ${response}                                         Post On Session                  GeneralConsentList            ${API_GENERALCONSENT_LIST['${ENV}']}    data=${request}                         headers=${HEADER_GENERALCONSENTLIST}    expected_status=${statusCode}
     Log many                                            ${response.text}
     ${json}                                             Convert String To JSON           ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
-    ${status}                                         Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                           ${response.status_code}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                           ${response.status_code}
     Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                                ${status}
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                     ${actual}
 
-Validation_API_Post_GeneralConsent_List_Handling
+validationApiPostGeneralConsentListHandling
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentList               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTLIST}                        create dictionary                Authorization=${token}        Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -34,12 +34,12 @@ Validation_API_Post_GeneralConsent_List_Handling
     Log many                                            ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
-    ${status}                                         Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                   ${response.status_code}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                   ${response.status_code}
     Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                        ${status}
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                             ${actual}
 
-Validation_API_Post_GeneralConsent_List_Fail
+validationApiPostGeneralConsentListFail
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentList               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTLIST}                        Run Keyword If                   ${rowNo} == 15                create dictionary                       Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -52,26 +52,26 @@ Validation_API_Post_GeneralConsent_List_Fail
     ...                                                 ELSE IF                          ${rowNo} == 48                create dictionary                       Authorization=${token}          Content-Type=${Content_Type}            CurrentUtcOffset=${INVALID}             IsCurrentlyDst=0
     ...                                                 ELSE IF                          ${rowNo} == 49                create dictionary                       Authorization=${token}          Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=${INVALID}    
     ...                                                 ELSE                             create dictionary             Authorization=${token}                  Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0                        
-    ${response}                                        Post On Session                  GeneralConsentList            ${API_GENERALCONSENT_LIST['${ENV}']}    data=${request}                 headers=${HEADER_GENERALCONSENTLIST}    expected_status=${statusCode}
+    ${response}                                         Post On Session                  GeneralConsentList            ${API_GENERALCONSENT_LIST['${ENV}']}    data=${request}                 headers=${HEADER_GENERALCONSENTLIST}    expected_status=${statusCode}
     Log many                                            ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
-    ${status}                                         Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                           ${response.status_code}
+    ${status}                                           Run Keyword And Return Status    Should Be Equal As Strings    ${statusCode}                           ${response.status_code}
     Write_Result_Status_To_Excel_GeneralConsent_List    ${EXCEL_NAME}                    ${SHEET_NAME}                 ${rowNo}                                ${status}
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                     ${actual}
 
 
-API_GeneralConsent_Submit
-    [Arguments]                   ${rowNo}                                           ${statusCode}                                     ${testcaseName}
+apiGeneralConsentSubmit
+    [Arguments]                   ${rowNo}                                           ${statusCode}                                ${testcaseName}
     Generate_File_Path_Request    ${JSON_GeneralConsent_Submit}
-    ${data_test}                  Read_Excel_For_Test                                ${EXCEL_NAME}                                     ${SHEET_NAME}                                         ${rowNo}
-    ${request}                    Prepare_Data_For_API_Post_GeneralConsent_Submit    ${data_test}
-    ${data}                       Run Keyword If                                     ${rowNo} < 16                                     Validation_API_Post_GeneralConsent_Submit             ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE IF                                            15 < ${rowNo} < 18                                Validation_API_Post_GeneralConsent_Submit_Handling    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                               Validation_API_Post_GeneralConsent_Submit_Fail    ${request}                                            ${statusCode}    ${rowNo}
+    ${data_test}                  Read_Excel_For_Test                                ${EXCEL_NAME}                                ${SHEET_NAME}                                    ${rowNo}
+    ${request}                    prepareDataForApiPostGeneralConsentSubmit    ${data_test}
+    ${data}                       Run Keyword If                                     ${rowNo} < 16                                validationApiPostGeneralConsentSubmit            ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE IF                                            15 < ${rowNo} < 18                           validationApiPostGeneralConsentSubmitHandling    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                               validationApiPostGeneralConsentSubmitFail    ${request}                                       ${statusCode}    ${rowNo}
 
-Validation_API_Post_GeneralConsent_Submit
+validationApiPostGeneralConsentSubmit
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTSUBMIT}                      create dictionary                Authorization=${token}        Content-Type=${Content_Type}              CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -84,7 +84,7 @@ Validation_API_Post_GeneralConsent_Submit
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                       ${actual}
 
-Validation_API_Post_GeneralConsent_Submit_Handling
+validationApiPostGeneralConsentSubmitHandling
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTSUBMIT}                      create dictionary                Authorization=${token}        Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -98,7 +98,7 @@ Validation_API_Post_GeneralConsent_Submit_Handling
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                             ${actual}
 
-Validation_API_Post_GeneralConsent_Submit_Fail
+validationApiPostGeneralConsentSubmitFail
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentSubmit             ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTSUBMIT}                      Run Keyword If                   ${rowNo} == 23                create dictionary                         Content-Type=${Content_Type}       CurrentUtcOffset=${CurrentUtcOffset}      IsCurrentlyDst=0
@@ -120,16 +120,16 @@ Validation_API_Post_GeneralConsent_Submit_Fail
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                       ${actual}
 
-API_GeneralConsent_Info
-    [Arguments]                   ${rowNo}                                         ${statusCode}                                   ${testcaseName}
+apiGeneralConsentInfo
+    [Arguments]                   ${rowNo}                                         ${statusCode}                                ${testcaseName}
     Generate_File_Path_Request    ${JSON_GeneralConsent_Submit}
-    ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                                   ${SHEET_NAME}                                       ${rowNo}
-    ${request}                    Prepare_Data_For_API_Post_GeneralConsent_Info    ${data_test}
-    ${data}                       Run Keyword If                                   ${rowNo} < 8                                    Validation_API_Post_GeneralConsent_Info             ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE IF                                          7 < ${rowNo} < 10                               Validation_API_Post_GeneralConsent_Info_Handling    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                             Validation_API_Post_GeneralConsent_Info_Fail    ${request}                                          ${statusCode}    ${rowNo}
+    ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                                ${SHEET_NAME}                                    ${rowNo}
+    ${request}                    prepareDataForApiPostGeneralConsentInfo    ${data_test}
+    ${data}                       Run Keyword If                                   ${rowNo} < 8                                 validationApiPostGeneralConsentInfo             ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE IF                                          7 < ${rowNo} < 10                            validationApiPostGeneralConsentInfoHandling    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                             validationApiPostGeneralConsentInfoFail    ${request}                                       ${statusCode}    ${rowNo}
 
-Validation_API_Post_GeneralConsent_Info
+validationApiPostGeneralConsentInfo
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentInfo               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTINFO}                        create dictionary                Authorization=${token}        Content-Type=${Content_Type}            CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -142,7 +142,7 @@ Validation_API_Post_GeneralConsent_Info
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                     ${actual}
 
-Validation_API_Post_GeneralConsent_Info_Handling
+validationApiPostGeneralConsentInfoHandling
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentInfo               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTINFO}                        create dictionary                Authorization=${token}        Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -156,7 +156,7 @@ Validation_API_Post_GeneralConsent_Info_Handling
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                             ${actual}
 
-Validation_API_Post_GeneralConsent_Info_Fail
+validationApiPostGeneralConsentInfoFail
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      GeneralConsentInfo               ${HOST_NAME}                  verify=${True}
     ${HEADER_GENERALCONSENTINFO}                        Run Keyword If                   ${rowNo} == 10                create dictionary                       Content-Type=${Content_Type}       CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
