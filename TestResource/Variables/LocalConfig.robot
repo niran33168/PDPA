@@ -10,7 +10,7 @@ ${SHEET_GeneralConsentInfo}      GeneralConsentInfo
 ${SHEET_GeneralConsentSubmit}    GeneralConsentSubmit
 ${SHEET_HealthCheckLiveness}     HealthCheckLiveness
 ${SHEET_HealthCheckReadiness}    HealthCheckReadiness
-${SHEET_UI}    UI
+${SHEET_UI}                      UI
 
 #### JSON REQUEST ####
 ${JSON_CollectionPoint_List}     ./API_CollectionPoint/CollectionPointList

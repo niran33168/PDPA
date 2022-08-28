@@ -2,23 +2,23 @@
 Resource    ../AllKeywords.txt
 
 *** Keywords ***
-API_HealthCheck_Liveness
+apiHealthCheckLiveness
     [Arguments]                   ${rowNo}                                     ${statusCode}                               ${testcaseName}
     Generate_File_Path_Request    ${JSON_CollectionPoint_List}
     ${data_test}                  Read_Excel_For_Test                          ${EXCEL_NAME}                               ${SHEET_NAME}                          ${rowNo}
-    ${request}                    Prepare_Data_For_API_HealthCheck_Liveness    ${data_test}
-    ${data}                       Run Keyword If                               ${rowNo} < 3                                Validation_API_HealthCheck_Liveness    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                         Validation_API_HealthCheck_Liveness_Fail    ${request}                             ${statusCode}    ${rowNo}
+    ${request}                    prepareDataForApiHealthcheck_Liveness    ${data_test}
+    ${data}                       Run Keyword If                               ${rowNo} < 3                                validationApiHealthCheckLiveness    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                         validationApiHealthCheckLivenessFail    ${request}                             ${statusCode}    ${rowNo}
 
-API_HealthCheck_Readiness
+apiHealthCheckReadiness
     [Arguments]                   ${rowNo}                                      ${statusCode}                                ${testcaseName}
     Generate_File_Path_Request    ${JSON_CollectionPoint_List}
     ${data_test}                  Read_Excel_For_Test                           ${EXCEL_NAME}                                ${SHEET_NAME}                           ${rowNo}
-    ${request}                    Prepare_Data_For_API_HealthCheck_Readiness    ${data_test}
-    ${data}                       Run Keyword If                                ${rowNo} == 2                                Validation_API_HealthCheck_Readiness    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                          Validation_API_HealthCheck_Readiness_Fail    ${request}                              ${statusCode}    ${rowNo}
+    ${request}                    prepareDataForApiHealthcheck_Readiness    ${data_test}
+    ${data}                       Run Keyword If                                ${rowNo} == 2                                validationApiHealthCheckReadiness    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                          validationApiHealthCheckReadinessFail    ${request}                              ${statusCode}    ${rowNo}
 
-Validation_API_HealthCheck_Liveness
+validationApiHealthCheckLiveness
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Liveness             ${HOST_NAME}                  verify=${True}
     ${HEADER_HEALTHCHECK_LIVENESS}              create dictionary                Authorization=${token}        Content-Type=${Content_Type}             Accept=application/json
@@ -32,7 +32,7 @@ Validation_API_HealthCheck_Liveness
     Run Keyword If                              ${status}==False                 Log                           Fail
     ...                                         ELSE IF                          ${status}==True               Log                                      ${actual}
 
-Validation_API_HealthCheck_Liveness_Fail
+validationApiHealthCheckLivenessFail
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Liveness             ${HOST_NAME}                  verify=${True}
     ${HEADER_HEALTHCHECK_LIVENESS}              Run Keyword If                   ${rowNo} == 5                 create dictionary           Content-Type=${Content_Type}             Accept=application/json
@@ -48,7 +48,7 @@ Validation_API_HealthCheck_Liveness_Fail
     Run Keyword If                              ${status}==False                 Log                           Fail
     ...                                         ELSE IF                          ${status}==True               Log                         ${actual}
 
-Validation_API_HealthCheck_Readiness
+validationApiHealthCheckReadiness
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Readiness            ${HOST_NAME}                  verify=${True}
     ${HEADER_HEALTHCHECK_READINESS}=            create dictionary                Authorization=${token}        Content-Type=${Content_Type}              Accept=application/json
@@ -62,7 +62,7 @@ Validation_API_HealthCheck_Readiness
     Run Keyword If                              ${status}==False                 Log                           Fail
     ...                                         ELSE IF                          ${status}==True               Log                                       ${actual}
 
-Validation_API_HealthCheck_Readiness_Fail
+validationApiHealthCheckReadinessFail
     [Arguments]                                 ${request}                       ${statusCode}                 ${rowNo}
     Create Session                              HealthCheck_Readiness            ${HOST_NAME}                  verify=${True}
     ${HEADER_HEALTHCHECK_READINESS}             Run Keyword If                   ${rowNo} == 4                 create dictionary         Content-Type=${Content_Type}              Accept=application/json
