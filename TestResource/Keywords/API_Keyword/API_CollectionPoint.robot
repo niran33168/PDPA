@@ -2,15 +2,15 @@
 Resource    ../AllKeywords.txt
 
 *** Keywords ***
-API_Get_Collection_Point_List
+apiGetCollectionPointList
     [Arguments]                   ${rowNo}                                         ${statusCode}                          ${testcaseName}
     Generate_File_Path_Request    ${JSON_CollectionPoint_List}
     ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                          ${SHEET_NAME}                               ${rowNo}
-    ${request}                    Prepare_Data_For_API_Get_CollectionPoint_List    ${data_test}
-    ${data}                       Run Keyword If                                   ${rowNo} != 2                          Validation_Get_CollectionPoint_List_Fail    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                             Validation_Get_CollectionPoint_List    ${request}                                  ${statusCode}    ${rowNo}
+    ${request}                    prepareDataForApiGetCollectionPointList    ${data_test}
+    ${data}                       Run Keyword If                                   ${rowNo} != 2                          validationGetCollectionPointListFail    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                             validationGetCollectionPointList    ${request}                                  ${statusCode}    ${rowNo}
 
-Validation_Get_CollectionPoint_List
+validationGetCollectionPointList
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                       CollectionPointList              ${HOST_NAME}                  verify=${True}
     ${HEADER_COLLECTIONPOINTLIST}                        create dictionary                Authorization=${token}        Content-Type=${Content_Type}             CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
@@ -24,7 +24,7 @@ Validation_Get_CollectionPoint_List
     Run Keyword If                                       ${status}==False                 Log                           Fail
     ...                                                  ELSE IF                          ${status}==True               Log                                      ${actual}
 
-Validation_Get_CollectionPoint_List_Fail
+validationGetCollectionPointListFail
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                       CollectionPointList              ${HOST_NAME}                  verify=${True}
     ${HEADER_COLLECTIONPOINTLIST}                        Run Keyword If                   ${rowNo} == 3                 create dictionary                        Content-Type=${Content_Type}    CurrentUtcOffset=${CurrentUtcOffset}     IsCurrentlyDst=0
@@ -42,16 +42,16 @@ Validation_Get_CollectionPoint_List_Fail
     Run Keyword If                                       ${status}==False                 Log                           Fail
     ...                                                  ELSE IF                          ${status}==True               Log                                      ${actual}
 
-API_Get_Collection_Point_Info
+apiGetCollectionPointInfo
     [Arguments]                   ${rowNo}                                         ${statusCode}                               ${testcaseName}
     Generate_File_Path_Request    ${JSON_CollectionPoint_Info}
     ${data_test}                  Read_Excel_For_Test                              ${EXCEL_NAME}                               ${SHEET_NAME}                                   ${rowNo}
-    ${request}                    Prepare_Data_For_API_Get_CollectionPoint_Info    ${data_test}
-    ${data}                       Run Keyword If                                   ${rowNo} == 2                               Validation_Get_CollectionPoint_Info             ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE IF                                          ${rowNo} == 3                               Validation_Get_CollectionPoint_Info_Handling    ${request}       ${statusCode}    ${rowNo}
-    ...                           ELSE                                             Validation_Get_CollectionPoint_Info_Fail    ${request}                                      ${statusCode}    ${rowNo}
+    ${request}                    prepareDataForApiGetCollectionPointInfo    ${data_test}
+    ${data}                       Run Keyword If                                   ${rowNo} == 2                               validationGetCollectionPointInfo             ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE IF                                          ${rowNo} == 3                               validationGetCollectionPointInfoHandling    ${request}       ${statusCode}    ${rowNo}
+    ...                           ELSE                                             validationGetCollectionPointInfoFail    ${request}                                      ${statusCode}    ${rowNo}
 
-Validation_Get_CollectionPoint_Info
+validationGetCollectionPointInfo
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     ${json_object}                                       Convert String to JSON           ${request}
     ${values}                                            Get Value From Json              ${json_object}                $..collectionpoint	
@@ -69,11 +69,11 @@ Validation_Get_CollectionPoint_Info
     Run Keyword If                                       ${status}==False                 Log                           Fail
     ...                                                  ELSE IF                          ${status}==True               Log                                               ${actual}
 
-Validation_Get_CollectionPoint_Info_Handling
+validationGetCollectionPointInfoHandling
     [Arguments]                                         ${request}                       ${statusCode}                 ${rowNo}
     Create Session                                      CollectionPointInfo              ${HOST_NAME}                  verify=${True}
     ${HEADER_COLLECTIONPOINTINFO}                       create dictionary                Authorization=${token}        Content-Type=${Content_Type}                  CurrentUtcOffset=${CurrentUtcOffset}    IsCurrentlyDst=0
-    ${response}                                         Post On Session                  CollectionPointInfo           ${API_GENERALCONSENT_INFO_ERROR['${ENV}']}    data=${request}                         headers=${HEADER_COLLECTIONPOINTINFO}    expected_status=${statusCode}
+    ${response}                                         Post On Session                  CollectionPointInfo           ${apiGeneralConsentInfo_ERROR['${ENV}']}    data=${request}                         headers=${HEADER_COLLECTIONPOINTINFO}    expected_status=${statusCode}
     Log many                                            ${response.text}
     should Be Equal As Strings                          ${statusCode}                    ${response.status_code}
     Set Test Variable                                   ${actual}                        ${response.text}
@@ -82,7 +82,7 @@ Validation_Get_CollectionPoint_Info_Handling
     Run Keyword If                                      ${status}==False                 Log                           Fail
     ...                                                 ELSE IF                          ${status}==True               Log                                           ${actual}
 
-Validation_Get_CollectionPoint_Info_Fail
+validationGetCollectionPointInfoFail
     [Arguments]                                          ${request}                       ${statusCode}                 ${rowNo}
     ${json_object}                                       Convert String to JSON           ${request}
     ${values}                                            Get Value From Json              ${json_object}                $..collectionpoint	

@@ -6,7 +6,7 @@ Get CollectionPointInfo Success
     [Setup]       Run Keywords                     Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                   
     ...           AND                              Set Test Variable    ${SHEET_NAME}    ${SHEET_CollectionPointInfo}
     [Teardown]    Close Browser
-    [Template]    API_Get_Collection_Point_Info
+    [Template]    apiGetCollectionPointInfo
    #rowNo        statusCode                       testcaseNo
     2             200                              CP1001_001
 
@@ -14,7 +14,7 @@ Get CollectionPointInfo Handling
     [Setup]       Run Keywords                     Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                   
     ...           AND                              Set Test Variable    ${SHEET_NAME}    ${SHEET_CollectionPointInfo}
     [Teardown]    Close Browser
-    [Template]    API_Get_Collection_Point_Info
+    [Template]    apiGetCollectionPointInfo
    #rowNo        statusCode                       testcaseNo
     3             404                              CP4001_001
 
@@ -22,7 +22,7 @@ Get CollectionPointInfo Missing
     [Setup]       Run Keywords                     Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                   
     ...           AND                              Set Test Variable    ${SHEET_NAME}    ${SHEET_CollectionPointInfo}
     [Teardown]    Close Browser
-    [Template]    API_Get_Collection_Point_Info
+    [Template]    apiGetCollectionPointInfo
    #rowNo        statusCode                       testcaseNo
     4             401                              CP1003_400
     5             400                              CP1003_401
@@ -32,7 +32,7 @@ Get CollectionPointInfo Empty value
     [Setup]       Run Keywords                     Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                   
     ...           AND                              Set Test Variable    ${SHEET_NAME}    ${SHEET_CollectionPointInfo}
     [Teardown]    Close Browser
-    [Template]    API_Get_Collection_Point_Info
+    [Template]    apiGetCollectionPointInfo
    #rowNo        statusCode                       testcaseNo
     7             401                              CP1004_600
     8             200                              CP1004_601
@@ -43,7 +43,7 @@ Get CollectionPointInfo Invalid
     [Setup]       Run Keywords                     Set Test Variable    ${EXCEL_NAME}    ${EXCEL_PDPA}                   
     ...           AND                              Set Test Variable    ${SHEET_NAME}    ${SHEET_CollectionPointInfo}
     [Teardown]    Close Browser
-    [Template]    API_Get_Collection_Point_Info
+    [Template]    apiGetCollectionPointInfo
    #rowNo        statusCode                       testcaseNo
     11            500                              CP1005_800
     12            200                              CP1005_801

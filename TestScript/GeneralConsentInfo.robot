@@ -6,7 +6,7 @@ GeneralConsent Info Success
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentInfo}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_Info
+    [Template]    apiGeneralConsentInfo
    #rowNo        statusCode                       testcaseNo
     2             200                        GI1001_000
     3             200                        GI1001_001
@@ -19,7 +19,7 @@ GeneralConsent Info Handling
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentInfo}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_Info
+    [Template]    apiGeneralConsentInfo
    #rowNo        statusCode                       testcaseNo
     8             404                        GC1002_200
     9             500                        GC1002_201
@@ -28,7 +28,7 @@ GeneralConsent Info Missing
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentInfo}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_Info
+    [Template]    apiGeneralConsentInfo
    #rowNo        statusCode                       testcaseNo
     10            401                        GC1004_400
     11            400                        GC1004_401
@@ -43,7 +43,7 @@ GeneralConsent Info Empty value
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentInfo}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_Info
+    [Template]    apiGeneralConsentInfo
    #rowNo        statusCode                       testcaseNo
     18            401                        GC1005_600
     19            200                        GC1005_601
@@ -58,7 +58,7 @@ GeneralConsent Info Invalid
     [Setup]       Run Keywords               Set Test Variable    ${EXCEL_NAME}    ${EXCEL_2C2P_PAYMENT}
     ...           AND                        Set Test Variable    ${SHEET_NAME}    ${SHEET_GeneralConsentInfo}
     [Teardown]    Close Browser
-    [Template]    API_GeneralConsent_Info
+    [Template]    apiGeneralConsentInfo
    #rowNo        statusCode                       testcaseNo
     26            401                        GC1006_800
     27            200                        GC1006_801
