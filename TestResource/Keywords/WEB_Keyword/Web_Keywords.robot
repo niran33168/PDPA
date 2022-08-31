@@ -139,7 +139,7 @@ AddUser
     WaitAndClick                     ${BTN_ADD}
     Wait Until Element Is Visible    ${HEADER_ADD_USER}                                                                                                     ${timeout}
     WaitAndClick                     ${TXT_TITLE}
-    WaitAndClick                     xpath=//div[@class="dx-scrollable-container"]//div[@class="dx-item dx-list-item"][3]
+    WaitAndClick                     xpath=//div[@class="dx-scrollview-content"]//div[contains(text(),'${data_test['user.title']}')]
     InputValue                       ${TXT_FIRSTNAME}                                                                                                       ${data_test['user.firstname']}
     InputValue                       ${TXT_LASTNAME}                                                                                                        ${data_test['user.lastname']}
     Run Keyword If                   '${data_test['user.gender']}'=='male'                                                                                  Execute JavaScript                      document.querySelector("#form > div > div > div > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div:nth-child(4) > div > div > div > div > div > div:nth-child(1)").click();
@@ -169,6 +169,8 @@ EditUser
     InputValue                       ${TXT_SEARCH}                                                                                                 ${data_test['search']}
     WaitAndClick                     ${BTN_EDIT}
     Wait Until Element Is Visible    ${HEADER_EDIT_USER}                                                                                           ${timeout}
+    WaitAndClick                     ${TXT_TITLE}
+    WaitAndClick                     xpath=//div[@class="dx-scrollview-content"]//div[contains(text(),'${data_test['user.title']}')]
     InputValue                       ${TXT_FIRSTNAME}                                                                                              ${data_test['user.firstname']}
     InputValue                       ${TXT_LASTNAME}                                                                                               ${data_test['user.lastname']}
     Run Keyword If                   '${data_test['user.gender']}'=='male'                                                                         Execute JavaScript                document.querySelector("#form > div > div > div > div:nth-child(1) > div > div > div > div > div > div > div > div > div > div > div:nth-child(2) > div > div > div > div > div > div > div > div > div:nth-child(4) > div > div > div > div > div > div:nth-child(1)").click();
