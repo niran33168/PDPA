@@ -213,11 +213,11 @@ prepareDataForApiPostGeneralConsentSubmit
     Run Keyword If    '${Test_Data['IdCardNumber']}'=='format' or '${Test_Data['IdCardNumber']}'=='length'    set to dictionary                           ${json}                   IdCardNumber=${string}
     Run Keyword If    '${Test_Data['IdCardNumber']}'=='missing'                                               Delete Object From Json                     ${json}                   $..IdCardNumber
 
-    ${string}         Run Keyword If                                                                '${Test_Data['Expired']}'=='format'    Generate_String_Format
-    ...               ELSE IF                                                                       '${Test_Data['Expired']}'=='length'    generateStringLength
-    Run Keyword If    '${Test_Data['Expired']}'!='empty' and '${Test_Data['Expired']}'!='None'      set to dictionary                      ${json}                   Expired=${Test_Data['Expired']}
-    Run Keyword If    '${Test_Data['Expired']}'=='format' or '${Test_Data['Expired']}'=='length'    set to dictionary                      ${json}                   Expired=${string}
-    Run Keyword If    '${Test_Data['Expired']}'=='missing'                                          Delete Object From Json                ${json}                   $..Expired
+    ${string}         Run Keyword If                                                                                '${Test_Data['ExpiredDateTime']}'=='format'    Generate_String_Format
+    ...               ELSE IF                                                                                       '${Test_Data['ExpiredDateTime']}'=='length'    generateStringLength
+    Run Keyword If    '${Test_Data['ExpiredDateTime']}'!='empty' and '${Test_Data['ExpiredDateTime']}'!='None'      set to dictionary                              ${json}                   ExpiredDateTime=${Test_Data['ExpiredDateTime']}
+    Run Keyword If    '${Test_Data['ExpiredDateTime']}'=='format' or '${Test_Data['ExpiredDateTime']}'=='length'    set to dictionary                              ${json}                   ExpiredDateTime=${string}
+    Run Keyword If    '${Test_Data['ExpiredDateTime']}'=='missing'                                                  Delete Object From Json                        ${json}                   $..ExpiredDateTime
 
     ${string}         Run Keyword If                                                                                  '${Test_Data['ConsentSignature']}'=='format'    Generate_String_Format
     ...               ELSE IF                                                                                         '${Test_Data['ConsentSignature']}'=='length'    generateStringLength
@@ -237,15 +237,15 @@ prepareDataForApiPostGeneralConsentSubmit
     Run Keyword If    '${Test_Data['Purpose.Active']}'=='format' or '${Test_Data['Purpose.Active']}'=='length'    set to dictionary                             ${json_purpose}           Active=${string}
     Run Keyword If    '${Test_Data['Purpose.Active']}'=='missing'                                                 Delete Object From Json                       ${json_purpose}           $..Active
 
-    ${string}         Run Keyword If                                                                                '${Test_Data['Purpose.Expired']}'=='format'    Generate_String_Format
-    ...               ELSE IF                                                                                       '${Test_Data['Purpose.Expired']}'=='length'    generateStringLength
-    ...               ELSE IF                                                                                       '${Test_Data['Purpose.Expired']}'=='date'      Get_Date                  
-    Run Keyword If    '${Test_Data['Purpose.Expired']}'!='empty' and '${Test_Data['Purpose.Expired']}'!='None'      set to dictionary                              ${json_purpose}           Expired=${Test_Data['Purpose.Expired']}
-    Run Keyword If    '${Test_Data['Purpose.Expired']}'=='format' or '${Test_Data['Purpose.Expired']}'=='length'    set to dictionary                              ${json_purpose}           Expired=${string}
-    Run Keyword If    '${Test_Data['Purpose.Expired']}'=='missing'                                                  Delete Object From Json                        ${json_purpose}           $..Expired
+    ${string}         Run Keyword If                                                                                                '${Test_Data['Purpose.ExpiredDateTime']}'=='format'    Generate_String_Format
+    ...               ELSE IF                                                                                                       '${Test_Data['Purpose.ExpiredDateTime']}'=='length'    generateStringLength
+    ...               ELSE IF                                                                                                       '${Test_Data['Purpose.ExpiredDateTime']}'=='date'      Get_Date                  
+    Run Keyword If    '${Test_Data['Purpose.ExpiredDateTime']}'!='empty' and '${Test_Data['Purpose.ExpiredDateTime']}'!='None'      set to dictionary                                      ${json_purpose}           ExpiredDateTime=${Test_Data['Purpose.ExpiredDateTime']}
+    Run Keyword If    '${Test_Data['Purpose.ExpiredDateTime']}'=='format' or '${Test_Data['Purpose.ExpiredDateTime']}'=='length'    set to dictionary                                      ${json_purpose}           ExpiredDateTime=${string}
+    Run Keyword If    '${Test_Data['Purpose.ExpiredDateTime']}'=='missing'                                                          Delete Object From Json                                ${json_purpose}           $..ExpiredDateTime
 
     ${status}          Run Keyword And Return Status    '${Test_Data['Purpose']}'!='empty' and '${Test_Data['Purpose']}'!='None'
-    &{dict_purpose}    Run Keyword If                   '${status}' == 'False'                                                      Create Dictionary    PurposeGuid=${Test_Data['Purpose.PurposeGuid']}    Active=${Test_Data['Purpose.Active']}    Expired=${Test_Data['Purpose.Expired']}    
+    &{dict_purpose}    Run Keyword If                   '${status}' == 'False'                                                      Create Dictionary    PurposeGuid=${Test_Data['Purpose.PurposeGuid']}    Active=${Test_Data['Purpose.Active']}    ExpiredDateTime=${Test_Data['Purpose.ExpiredDateTime']}    
     @{list}            Create List                      ${dict_purpose}
 
     Run Keyword If    '${Test_Data['Purpose.PurposeGuid']}'!='empty' and '${Test_Data['Purpose.PurposeGuid']}'!='None'    set to dictionary    ${json}    Purpose=${list}

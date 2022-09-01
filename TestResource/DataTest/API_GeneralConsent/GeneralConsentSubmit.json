@@ -12,13 +12,13 @@
     "VerifyType": "",
     "EventCode": "",
     "IdCardNumber": "",
-    "Expired": "",
+    "ExpiredDateTime": "",
     "ConsentSignature": "",
     "Purpose": [
         {
             "PurposeGuid": "",
-            "Active": 0,
-            "Expired": ""
+            "Active": true,
+            "ExpiredDateTime": ""
         }
     ],
     "CollectionPointCustomField": [
